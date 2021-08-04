@@ -4,6 +4,7 @@ import './styles/styles.css';
 import Search from "./components/Search";
 import youtubeApi from "./api/youtubeApi";
 import VideoList from "./components/VideoList";
+import VideoItem  from "./components/VideoItem";
 
 function App({ onVideoSelected }) {
   const [videosMetaInfo, setVideoMetaInfo] = useState([]);
@@ -15,17 +16,22 @@ function App({ onVideoSelected }) {
         q: keyword
       }
     });
-    setSelectedVideoId(response.data.items);
-    setVideoMetaInfo(response.data.items[0].id.videoId);    
+    
+    setVideoMetaInfo(response.data.items);   
+    setSelectedVideoId(response.data.items[0]);
     
     };
     console.log(videosMetaInfo, selectedVideoId);
-    
-  
+
+    const selectVideo = (video) => {
+      setSelectedVideoId(video)
+    }
+
   return (
     <div className="App">
      <Search onSearch={onSearch}/>
-     <VideoList onVideoSelected={onVideoSelected} data={videosMetaInfo} />
+     <VideoList onVideoSelected={selectVideo} data={videosMetaInfo} />
+     <VideoItem videoId={selectedVideoId} />
     </div>
   );
 };

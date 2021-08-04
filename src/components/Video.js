@@ -1,36 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/video.css";
 
-function selectVideo(videoIdObj, onVideoSelected) {
-  onVideoSelected(videoIdObj.videoId);
-}
-function getCss(imageurl) {
-  const _styles = {
-    backgroundImage: `url(${imageurl})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    height: "180px",
-    position: "relative",
-  };
-  return _styles;
-}
-function constructVideoTitles(videosData, onVideoSelected) {
-  return videosData.map(({ snippet, id }, index) => {
-    return (
-      <div
-        className="video"
-        key={index}
-       onClick={() => selectVideo(id, onVideoSelected)}>
-      <div style={getCss(snippet.thumbnails.high.url)} key={index} />
-      <p className="title">{snippet.title}</p>
-    </div>
-  );
- });
-}
 
-const Video = ({ data, onVideoSelected }) => {
+const Video = ({video, onVideoSelected}) => {
+  
 
-  return <>{constructVideoTitles(data, onVideoSelected)}</>;
-};
+
+  return (<div onClick={() => onVideoSelected(video)}>
+    <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} />
+    <div>{video.snippet.title}</div>
+  </div>)
+
+}
 
 export default Video;
