@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideoItem = ({ videoId, selectedVideoId  }) => {
+const VideoItem = ({ onVideoSelected, videoId }) => {
     console.log(videoId)
   if (!videoId) {
     return (
@@ -10,15 +10,22 @@ const VideoItem = ({ videoId, selectedVideoId  }) => {
     );
   }
   return (
-    <div className="video-player"
-    onClick={() => selectedVideoId(videoId)}>
-      <iframe
-        title={videoId}
-        className="video-iframe"
-        src={`https://www.youtube.com/embed/${videoId}`}
-      />
+   
+    <div>
+        <div className="ui embed">
+            <iframe allowFullScreen
+            title={videoId}
+            
+            src={`https://www.youtube.com/embed/${videoId.id.videoId}`}/>
+            </div>
+            <div>
+                <p style={{fontSize: 30}}>{videoId.snippet.title}</p>
+                <p>{videoId.snippet.description}</p>
+            </div>
     </div>
+    
   );
-};
+}
+
 
 export default VideoItem;

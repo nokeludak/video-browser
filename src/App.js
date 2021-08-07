@@ -21,7 +21,7 @@ function App({ onVideoSelected }) {
     setSelectedVideoId(response.data.items[0]);
     
     };
-    console.log(videosMetaInfo, selectedVideoId);
+    console.log("selectedVideo", selectedVideoId);
 
     const selectVideo = (video) => {
       setSelectedVideoId(video)
